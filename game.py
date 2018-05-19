@@ -10,7 +10,6 @@ class Game:
         self.frame_rate = frame_rate
         self.game_over = False
         self.objects = []
-        pygame.mixer.pre_init(44100, 16, 2, 4096)
         pygame.init()
         pygame.font.init()
         self.surface = pygame.display.set_mode((width, height))

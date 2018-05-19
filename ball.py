@@ -11,7 +11,7 @@ class Ball(GameObject):
         self.color = color
 
     def draw(self, surface):
-        r = pygame.draw.circle(surface, self.color, self.center, self.radius)
+        r = pygame.draw.circle(surface, self.color, self.center, self.radius)  
 
     def update(self):
-        super().update()
+        super().update() # обращение к методам родителя -> следует из наследования

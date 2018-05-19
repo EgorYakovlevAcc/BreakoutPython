@@ -1,2 +1,0 @@
-# BreakoutPython
-Breakout game

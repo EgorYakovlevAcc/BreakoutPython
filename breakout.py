@@ -17,7 +17,7 @@ import colors
 
 special_effects = dict(
     long_paddle=(colors.ORANGE,
-                 lambda g: g.paddle.bounds.inflate_ip(c.paddle_width // 2, 0),
+                 lambda g: g.paddle.bounds.inflate_ip(c.paddle_width // 2, 0), # Лямбда функция - анонимная функция через ключевле слово
                  lambda g: g.paddle.bounds.inflate_ip(-c.paddle_width // 2, 0)),
     slow_ball=(colors.AQUAMARINE2,
                lambda g: g.change_ball_speed(-1),
@@ -118,6 +118,7 @@ class Breakout(Game):
                         c.paddle_height,
                         c.paddle_color,
                         c.paddle_speed)
+        self.mouse_handlers.append(paddle.handle_mouse_move)
         self.keydown_handlers[pygame.K_LEFT].append(paddle.handle)
         self.keydown_handlers[pygame.K_RIGHT].append(paddle.handle)
         self.keyup_handlers[pygame.K_LEFT].append(paddle.handle)
@@ -216,9 +217,18 @@ class Breakout(Game):
             if not edge:
                 continue
 
-            self.bricks.remove(brick)
-            self.objects.remove(brick)
-            self.score += self.points_per_brick
+            if brick.color == colors.RED1:
+                self.bricks.remove(brick)
+                self.objects.remove(brick)
+                self.score += self.points_per_brick
+            elif brick.color == colors.GOLD1:
+                brick.color = colors.RED1
+            elif brick.color == colors.AQUAMARINE2:
+                brick.color = colors.GOLD1
+            elif brick.color == colors.ORANGE:
+                brick.color = colors.AQUAMARINE2
+            elif brick.color == colors.DARKSEAGREEN4:
+                brick.color = colors.ORANGE
 
             if edge in ('top', 'bottom'):
                 self.ball.speed = (s[0], -s[1])
